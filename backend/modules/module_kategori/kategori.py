@@ -84,8 +84,31 @@ class get:
 
                 return make_response(json.dumps(response)), 400
 
-class post:
+ class delete:
     def __init__(self):
         pass
+    def delete_data(self):
+        response = {
+                        "message"       : {},
+                        "data"          : {}
+                   }
 
-    def 
+        try:
+            idnya = str(request.json.get('id'))
+
+            get_data = Kategori.query.filter_by(id_kategori=idnya).delete()
+
+            db.session.commit()
+            db.session.execute("ALTER TABLE Kategori AUTO_INCREMENT=0")
+
+            response["message"]     = 'Success'
+            response["data"]        = "data berhasil dihapus"
+
+            return make_response(json.dumps(response)), 200
+
+        except:
+
+            response["message"]     = 'Failed'
+            response["data"]        = ""
+
+            return make_response(json.dumps(response)), 1000
