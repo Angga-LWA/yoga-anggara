@@ -111,4 +111,4 @@ class get:
             response["message"]     = 'Failed'
             response["data"]        = ""
 
-            return make_response(json.dumps(response)), 1000
+            return make_response(json.dumps(response)), 400
