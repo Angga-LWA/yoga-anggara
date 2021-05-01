@@ -112,3 +112,42 @@ class get:
             response["data"]        = ""
 
             return make_response(json.dumps(response)), 400
+
+class put:
+    def __init__(self):
+        pass
+    def update_data(self):
+        response = {
+                        "message"       : {},
+                        "data"          : {}
+                   }
+        try:
+            id_kategori   = str(request.json.get(id_kategori))
+            nama_kategori = request.json.get('nama_kategori')
+            tgl_kategori  = request.json.get('tgl_kategori')
+            flag_kategori = request.json.get('flag_kategori')
+
+            tgl_kategori  = datetime.datetime.strptime(tgl_kategori, '%d-%m-%Y')
+
+            get_data      = Kategori.query.get(id_kategori)
+
+            get_data.nama_kategori  = nama_kategori
+            get_data.tgl_kategori   = tgl_kategori
+            get_data.flag_kategori  = flag_kategori
+
+            db.session.commit()
+
+            kategori_schema = KategoriSchema()
+            kategori        = kategori_schema.dump(get_data)
+
+            response["message"]     = 'Success'
+            response["data"]        = "data berhasil di update"
+
+            return make_response(json.dumps(response)), 200
+
+        except:
+
+            response["message"]     = 'Failed'
+            response["data"]        = ""
+
+            return make_response(json.dumps(response)), 400
