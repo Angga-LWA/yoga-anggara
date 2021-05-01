@@ -151,3 +151,9 @@ class put:
             response["data"]        = ""
 
             return make_response(json.dumps(response)), 400
+
+class post:
+    def __init__(self):
+        pass
+
+    def
