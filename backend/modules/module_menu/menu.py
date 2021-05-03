@@ -53,36 +53,36 @@ class get:
 
                 return make_response(json.dumps(response)), 200
 
-            except:
+        except:
 
-                response["message"]         = 'Failed'
-                response["data"]            = ""
+            response["message"]         = 'Failed'
+            response["data"]            = ""
 
-                return make_response(json.dumps(response)), 400
+            return make_response(json.dumps(response)), 400
 
-        def get_data_one(self):
-            response = {
-                            "message"       : {},
-                            "data"          : {}
-                       }
-            try:
-                idnya = str(request.json.get('id'))
+    def get_data_one(self):
+        response = {
+                        "message"       : {},
+                        "data"          : {}
+                   }
+        try:
+            idnya = str(request.json.get('id'))
 
-                get_data = Menu.query.get(idnya)
-                menu_schema = MenuSchema()
-                menu = menu_schema.dump(get_data)
+            get_data = Menu.query.get(idnya)
+            menu_schema = MenuSchema()
+            menu = menu_schema.dump(get_data)
 
-                response["message"]     = 'Success'
-                response["data"]        = menu
+            response["message"]     = 'Success'
+            response["data"]        = menu
 
-                return make_response(json.dumps(response)), 200
+            return make_response(json.dumps(response)), 200
 
-            except:
+        except:
 
-                response["message"]     = 'Failed'
-                response["data"]        = ""
+            response["message"]     = 'Failed'
+            response["data"]        = ""
 
-                return make_response(json.dumps(response)), 400
+            return make_response(json.dumps(response)), 400
 
 class delete:
     def __init__(self):

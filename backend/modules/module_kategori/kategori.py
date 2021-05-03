@@ -60,29 +60,29 @@ class get:
 
                 return make_response(json.dumps(response)), 400
 
-        def get_data_one(self):
-            response = {
-                            "message"       : {},
-                            "data"          : {}
-                       }
-            try:
-                idnya = str(request.json.get('id'))
+    def get_data_one(self):
+        response = {
+                        "message"       : {},
+                        "data"          : {}
+                   }
+        try:
+            idnya = str(request.json.get('id'))
 
-                get_data = Kategori.query.get(idnya)
-                kategori_schema = KategoriSchema()
-                kategori = kategori_schema.dump(get_data)
+            get_data = Kategori.query.get(idnya)
+            kategori_schema = KategoriSchema()
+            kategori = kategori_schema.dump(get_data)
 
-                response["message"]     = 'Success'
-                response["data"]        = kategori
+            response["message"]     = 'Success'
+            response["data"]        = kategori
 
-                return make_response(json.dumps(response)), 200
+            return make_response(json.dumps(response)), 200
 
-            except:
+        except:
 
-                response["message"]     = 'Failed'
-                response["data"]        = ""
+            response["message"]     = 'Failed'
+            response["data"]        = ""
 
-                return make_response(json.dumps(response)), 400
+            return make_response(json.dumps(response)), 400
 
  class delete:
     def __init__(self):

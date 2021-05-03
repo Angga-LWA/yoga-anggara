@@ -31,3 +31,58 @@ sys.path.append("core/settings")
 
 from models     import *
 from settings   import *
+
+class get:
+    def __init__(self):
+        pass
+
+    def get_discount_all(self):
+        response = {
+                        "message"       : {},
+                        "data"          : {}
+                   }
+        try:
+            list = []
+
+            get_discount = Discount.query.all()
+            discount_schema = DiscountSchema(many=True)
+            discount = discount_schema.dump(get_discount)
+
+            response["message"]         = 'Success'
+            response["data"]            = discount
+
+            return make_response(json.dumps(response)), 200
+
+        except:
+
+            response["message"]         = 'Failed'
+            response["data"]            = ""
+
+            return make_response(json.dumps(response)), 400
+
+    def get_discount_one(self):
+        response = {
+                            "message"       : {},
+                            "data"          : {}
+                   }
+        try:
+            idnya = str(request.json.get('id'))
+
+            get_discount = Discount.query.get(idnya)
+            discount_schema = DiscountSchema()
+            discount = discount_schema.dump(get_discount)
+
+            response["message"]     = 'Success'
+            response["data"]        = discount
+
+            return make_response(json.dumps(response)), 200
+
+        except:
+
+            response["message"]     = 'Failed'
+            response["data"]        = ""
+
+            return make_response(json.dumps(response)), 400
+
+class delete:
+    
