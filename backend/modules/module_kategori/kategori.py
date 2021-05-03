@@ -68,9 +68,9 @@ class get:
             try:
                 idnya = str(request.json.get('id'))
 
-                get_data    = Kategori.query.get(idnya)
+                get_data = Kategori.query.get(idnya)
                 kategori_schema = KategoriSchema()
-                kategori    = kategori_schema.dump(get_data)
+                kategori = kategori_schema.dump(get_data)
 
                 response["message"]     = 'Success'
                 response["data"]        = kategori
