@@ -122,7 +122,7 @@ class put:
                         "data"          : {}
                    }
         try:
-            id_menu     = str(request.json.get(id_menu))
+            id_menu     = str(request.json.get('id_menu'))
             nama_menu   = request.json.get('nama_menu')
             tgl_menu    = request.json.get('tgl_menu')
             harga_menu  = request.json.get('harga_menu')

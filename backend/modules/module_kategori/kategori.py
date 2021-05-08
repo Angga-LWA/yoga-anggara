@@ -122,7 +122,7 @@ class put:
                         "data"          : {}
                    }
         try:
-            id_kategori   = str(request.json.get(id_kategori))
+            id_kategori   = str(request.json.get('id_kategori'))
             nama_kategori = request.json.get('nama_kategori')
             tgl_kategori  = request.json.get('tgl_kategori')
             flag_kategori = request.json.get('flag_kategori')
