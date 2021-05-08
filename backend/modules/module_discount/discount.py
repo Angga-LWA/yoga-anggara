@@ -85,4 +85,30 @@ class get:
             return make_response(json.dumps(response)), 400
 
 class delete:
-    
+    def __init__(self):
+        pass
+    def delete_discount(self):
+        response = {
+                        "message"       : {},
+                        "data"          : {}
+                   }
+
+        try:
+            idnya  str(request.json.get('id'))
+
+            get_discount = Discount.query.filter_by(id_discount=idnya).delete()
+
+            db.session.commit()
+            db.session.execute("ALTER TABLE Discount AUTO_INCREMENT=0")
+
+            response["message"]         = 'Success'
+            response["data"]            = "data berhasil dihapus"
+
+            return make_response(json.dumps(response)), 200
+
+        except:
+
+            response["message"]     = 'Failed'
+            response["data"]        = ""
+
+            return make_response(json.dumps(response)), 400
