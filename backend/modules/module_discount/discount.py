@@ -192,3 +192,32 @@ class post:
             tgl_disc_berlaku = datetime.datetime.strptime(tgl_disc_berlaku, '%d-%m-%Y')
             tgl_disc_berakhir = datetime.datetime.strptime(tgl_disc_berakhir, '%d-%m-%Y')
             tgl_disc = datetime.datetime.strptime(tgl_disc, '%d-%m-%Y')
+
+            get_discount    = Discount.query.filter_by(nama_discount=nama_discount).first()
+            if get_discount is not None:
+                response["message"]     = 'Failed'
+                response["data"]        = 'Nama Discount Already Exist!'
+                return make_response(json.dumps(response)), 400
+
+            discount = Discount(nama_discount=nama_discount, tgl_disc_berlaku=tgl_disc_berlaku, tgl_disc_berakhir=tgl_disc_berakhir, tgl_disc=tgl_disc, flag_disc=flag_disc, kode_disc=kode_disc, role_disc_1=role_disc_1, role_disc_2=role_disc_2, role_disc_3=role_disc_3, keterangan_disc=keterangan_disc)
+            db.session.add(discount)
+            db.session.commit()
+
+            tgl_log = datetime.datetime.now()
+            log = 'Menambahkan Data Discount Terbaru'
+
+            log = Log(tgl_log=tgl_log, log=log, username_in=username_in)
+            db.session.add(log)
+            db.session.commit()
+
+            response["message"]     = 'Success'
+            response["data"]        = 'data berhasil masuk'
+
+            return make_response(json.dumps(response)), 200
+
+        except:
+
+            response["message"]     = 'Failed'
+            response["data"]        = "Error"
+
+            return make_response(json.dumps(response)), 400

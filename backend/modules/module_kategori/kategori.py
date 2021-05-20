@@ -186,7 +186,7 @@ class post:
             db.session.commit()
 
             response["message"]     = 'Success'
-            response["data"]        = "data berhasil masuk"
+            response["data"]        = 'data berhasil masuk'
 
             return make_response(json.dumps(response)), 200
 
